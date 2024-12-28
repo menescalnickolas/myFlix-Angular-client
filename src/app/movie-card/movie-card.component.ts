@@ -10,7 +10,7 @@ import { UserRegistrationService } from '../fetch-api-data.service'
 
 export class MovieCardComponent {
   movies: any[] = [];
-  constructor(public fetchApiData: UserRegistrationService) { }
+  constructor(public fetchApiData: UserRegistrationService,) { }
 
 ngOnInit(): void {
   this.getMovies();
@@ -19,7 +19,7 @@ ngOnInit(): void {
 getMovies(): void {
   this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
-      console.log(this.movies);
+      console.log('Movies loaded: ' + this.movies);
       return this.movies;
     });
   }

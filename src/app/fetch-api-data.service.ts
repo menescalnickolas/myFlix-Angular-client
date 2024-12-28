@@ -5,7 +5,7 @@ import { Observable, throwError } from 'rxjs';
 
 
 //Declaring the api url that will provide data for the client app
-const apiUrl = 'https://git.heroku.com/mytestflix.git';
+const apiUrl = 'https://testflix2-2b11acffaf24.herokuapp.com';
 @Injectable({
   providedIn: 'root'
 })
@@ -19,7 +19,7 @@ export class UserRegistrationService {
  // Making the api call for the user registration endpoint
   public userRegistration(userDetails: any): Observable<any> {
     console.log(userDetails);
-    return this.http.post(apiUrl + '/users/', userDetails).pipe(
+    return this.http.post(apiUrl + '/users', userDetails).pipe(
     catchError(this.handleError)
     );
   }
@@ -39,7 +39,7 @@ private handleError(error: HttpErrorResponse): any {
 // User Login
 public userLogin(userDetails: any): Observable<any> {
   const token = localStorage.getItem('token');
-  return this.http.post(apiUrl + '/login/', userDetails).pipe(
+  return this.http.post(apiUrl + '/login', userDetails).pipe(
     catchError(this.handleError)
   );
 }

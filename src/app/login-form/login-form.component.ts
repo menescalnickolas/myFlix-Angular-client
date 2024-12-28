@@ -28,7 +28,7 @@ logInUser() : void {
   this.fetchApiData.userLogin(this.userData).subscribe(res => {
       this.dialogRef.close();
       
-      this.snackBar.open(`Login success, Welcome ${res.user.Username}`, "OK", {
+      this.snackBar.open(`Welcome ${res.user.Username}`, "OK", {
           duration: 2000
       });
       let user = {

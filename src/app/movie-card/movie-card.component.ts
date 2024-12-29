@@ -1,6 +1,9 @@
 
 import { Component, OnInit } from '@angular/core';
 import { UserRegistrationService } from '../fetch-api-data.service'
+import { ProfileViewComponent } from '../profile-view/profile-view.component';
+import { MatDialog } from '@angular/material/dialog';
+import { MessageBoxComponent } from '../message-box/message-box.component';
 
 @Component({
   selector: 'app-movie-card',
@@ -8,9 +11,12 @@ import { UserRegistrationService } from '../fetch-api-data.service'
   styleUrls: ['./movie-card.component.scss']
 })
 
-export class MovieCardComponent {
+export class MovieCardComponent implements OnInit {
   movies: any[] = [];
-  constructor(public fetchApiData: UserRegistrationService,) { }
+  constructor(
+    public fetchApiData: UserRegistrationService,
+    public dialog: MatDialog
+  ) { }
 
 ngOnInit(): void {
   this.getAllMovies();
@@ -23,4 +29,10 @@ getAllMovies(): void {
       return this.movies;
     });
   }
+
+  openProfileViewDialog(): void {
+      this.dialog.open(ProfileViewComponent, {
+        width: '280px'
+      });
+    }
 }

@@ -159,7 +159,7 @@ public deleteFavoriteMovie(Username: string, MovieID: string): Observable<any> {
 // Edit user info
 public editUser(userDetails: any): Observable<any> {
   const token = localStorage.getItem('token');
-  return this.http.put(apiUrl + '/users/', userDetails, {headers: new HttpHeaders(
+  return this.http.put(apiUrl + '/users/' + userDetails, {headers: new HttpHeaders(
     {
       Authorization: `Bearer ${this.getToken()}`,
     })}).pipe(
@@ -177,6 +177,15 @@ public deleteUser(Username: string): Observable<any> {
     })}).pipe(
     map(this.extractResponseData),
     catchError(this.handleError)
+  );
+}
+
+public getUserByID(id: string): Observable<any> {
+  return this.http.get(apiUrl + `/user/${id}`, {headers: new HttpHeaders(
+  {
+      Authorization: `Bearer ${this.getToken()}`,
+  })}).pipe(
+      map(this.extractResponseData), catchError(this.handleError)
   );
 }
 

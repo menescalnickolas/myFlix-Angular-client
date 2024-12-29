@@ -22,6 +22,9 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { RouterModule, Routes } from '@angular/router';
 
 import { MatIconModule } from '@angular/material/icon';
+import { ProfileViewComponent } from './profile-view/profile-view.component';
+import { EditUserScreenComponent } from './edit-user-screen/edit-user-screen.component';
+import { MessageBoxComponent } from './message-box/message-box.component';
 
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
@@ -35,7 +38,10 @@ const appRoutes: Routes = [
     UserRegistrationFormComponent,
     LoginFormComponent,
     MovieCardComponent,
-    WelcomePageComponent
+    WelcomePageComponent,
+    ProfileViewComponent,
+    EditUserScreenComponent,
+    MessageBoxComponent
   ],
   imports: [
     BrowserModule,

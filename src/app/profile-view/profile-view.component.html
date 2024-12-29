@@ -1,0 +1,26 @@
+
+<mat-card style="height: 400px;">
+  <mat-card-header>
+    <mat-card-title style="">User Profile</mat-card-title>
+    <mat-card-title>Username: {{ userData.Username }}</mat-card-title>
+    <mat-card-title>Email: {{ userData.Email }}</mat-card-title>
+  </mat-card-header>
+  <button
+  mat-raised-button
+  (click)="openEditProfileDialog()"
+  color="primary"
+  style="margin-right: 10px;"
+>
+Edit
+</button>
+
+
+  <button
+  mat-raised-button
+  (click)="logout()"
+  color="primary"
+  style="margin-right: 10px;"
+>
+Logout
+</button>
+</mat-card>

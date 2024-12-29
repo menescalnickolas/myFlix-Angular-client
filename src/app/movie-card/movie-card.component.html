@@ -1,4 +1,14 @@
+<div>
+    <button
+    mat-raised-button
+    (click)="openProfileViewDialog()"
+    style="margin-right: 10px;"
+    color="primary"
+  >
+    PROFILE
+  </button>
 
+</div>
 
 <div style="display: flex; flex-wrap: wrap; gap: 16px;">
     <mat-card *ngFor="let movie of movies" style="flex: 1 1 auto;">
@@ -9,7 +19,7 @@
         </mat-card-header>
         
         <mat-card-actions>
-            <button mat-button color="primary">Genre</button>
+            <button mat-button color="primary" >Genre</button>
             <button mat-button color="primary">Director</button>
             <button mat-button color="primary">Synopsis</button>
             <mat-icon>favorite_border</mat-icon>

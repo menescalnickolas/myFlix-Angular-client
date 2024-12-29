@@ -23,23 +23,35 @@ export class EditUserScreenComponent implements OnInit {
   }
 
   updateUser(): void {
-    this.fetchApiData.editUser(this.userData).subscribe((res: any) => {
+    if (!this.userData.Username) {
+      alert("Username is required.");
+      return;
+    }
+
+    this.fetchApiData.editUser(this.userData.Username).subscribe((res: any) => {
       this.userData = {
         ...res,
         id: res._id,
-        password: this.userData.password,
+        password: this.userData.Password,
         token: this.userData.token
       };
       localStorage.setItem("user", JSON.stringify(this.userData));
-    }, (err: any) => {
-      console.error(err)
-    })
+      alert("Profile updated successfully!");
+    },
+    (err: any) => {
+      console.error(err);
+      alert("Failed to update profile.");
+    }
+  );
   }
 
  deleteUser(): void {
+  console.log('Deleting user with username:', this.userData.Username);
+
     if (confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
       this.fetchApiData.deleteUser(this.userData.Username).subscribe(
-        () => {
+        (res: any) => {
+          console.log('Account deleted successfully:', res.message);  // Access the message from JSON
           alert("Your account has been deleted.");
           localStorage.clear();
           this.router.navigate(['/welcome']); // Redirect to welcome or login page

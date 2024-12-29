@@ -29,16 +29,23 @@ export class UserRegistrationService {
     );
   }
 
-private handleError(error: HttpErrorResponse): any {
-    if (error.error instanceof ErrorEvent) {
-    console.error('Some error occurred:', error.error.message);
+  private handleError(error: HttpErrorResponse): any {
+    if (error.status !== 200) {
+      if (error.error instanceof ErrorEvent) {
+        console.error('Some error occurred:', error.error.message);
+      } else {
+        console.error(
+          `Error Status code ${error.status}, ` +
+          `Error body is: ${error.error}`
+        );
+      }
+      return throwError(
+        'Something bad happened; please try again later.'
+      );
     } else {
-    console.error(
-        `Error Status code ${error.status}, ` +
-        `Error body is: ${error.error}`);
+      console.log('Request was successful:', error);  // Add this to track success
+      return error;
     }
-    return throwError(
-    'Something bad happened; please try again later.');
   }
 
 // User Login
@@ -157,26 +164,40 @@ public deleteFavoriteMovie(Username: string, MovieID: string): Observable<any> {
 
 
 // Edit user info
-public editUser(userDetails: any): Observable<any> {
-  const token = localStorage.getItem('token');
-  return this.http.put(apiUrl + '/users/' + userDetails, {headers: new HttpHeaders(
-    {
-      Authorization: `Bearer ${this.getToken()}`,
-    })}).pipe(
-    map(this.extractResponseData),
-    catchError(this.handleError)
+public editUser(Username: any): Observable<any> {
+  const token = this.getToken();  // Ensure the token is added to the request header
+  const headers = new HttpHeaders({
+    Authorization: `Bearer ${token}`,
+  });
+
+  return this.http.put(apiUrl + `/users/${Username}`,
+  {headers}).pipe(
+      map(this.extractResponseData), catchError(this.handleError)
   );
 }
 
+
 // Delete user
 public deleteUser(Username: string): Observable<any> {
-  const token = localStorage.getItem('token');
-  return this.http.delete(apiUrl + '/users/' + Username, {headers: new HttpHeaders(
-    {
-      Authorization: `Bearer ${this.getToken()}`,
-    })}).pipe(
-    map(this.extractResponseData),
-    catchError(this.handleError)
+  const headers = new HttpHeaders({
+    Authorization: `Bearer ${this.getToken()}`
+  });
+
+  return this.http.delete(`${apiUrl}/users/${Username}`, { headers }).pipe(
+    catchError((error: HttpErrorResponse) => {
+      let parsedError = error;
+
+      if (error.status === 200 && typeof error.error === 'string') {
+        try {
+          const parsedResponse = JSON.parse(error.error);
+          parsedError = { ...error, error: parsedResponse };  // Create a new object with the parsed response
+        } catch (e) {
+          console.error('Error parsing response:', e);
+        }
+      }
+
+      return throwError(parsedError);
+    })
   );
 }
 

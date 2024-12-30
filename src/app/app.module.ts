@@ -24,7 +24,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { ProfileViewComponent } from './profile-view/profile-view.component';
 import { EditUserScreenComponent } from './edit-user-screen/edit-user-screen.component';
-import { MessageBoxComponent } from './message-box/message-box.component';
+import { MovieDetailsDialogComponent } from './movie-details-dialog/movie-details-dialog.component';
+
 
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
@@ -41,7 +42,8 @@ const appRoutes: Routes = [
     WelcomePageComponent,
     ProfileViewComponent,
     EditUserScreenComponent,
-    MessageBoxComponent
+    MovieDetailsDialogComponent,
+
   ],
   imports: [
     BrowserModule,

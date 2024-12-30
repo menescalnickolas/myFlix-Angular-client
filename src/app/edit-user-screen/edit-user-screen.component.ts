@@ -13,14 +13,13 @@ export class EditUserScreenComponent implements OnInit {
 
   constructor(
     public fetchApiData: UserRegistrationService,
-    public router: Router
+    public router: Router,
+      public dialogRef: MatDialogRef <EditUserScreenComponent>,
   ) {
     this.userData = JSON.parse(localStorage.getItem("user") || "");
   }
 
-  ngOnInit(): void {
-    this.updateUser();
-  }
+  ngOnInit(): void {}
 
   updateUser(): void {
     if (!this.userData.Username) {
@@ -28,7 +27,8 @@ export class EditUserScreenComponent implements OnInit {
       return;
     }
 
-    this.fetchApiData.editUser(this.userData.Username).subscribe((res: any) => {
+    this.fetchApiData.editUser(this.userData).subscribe(
+      (res: any) => {
       this.userData = {
         ...res,
         id: res._id,
@@ -62,6 +62,10 @@ export class EditUserScreenComponent implements OnInit {
         }
       );
     }
+
+    setTimeout(() => {
+      this.dialogRef.close();
+    }, 100);
   }
 
 }

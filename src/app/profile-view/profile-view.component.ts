@@ -80,7 +80,9 @@ export class ProfileViewComponent implements OnInit {
       this.dialog.open(EditUserScreenComponent, {
         width: '280px'
       });
-    }
-
+      setTimeout(() => {
+        this.dialogRef.close();
+      }, 100);
     
+    }
 }

@@ -17,9 +17,9 @@ export class UserRegistrationService {
 
 
   private getToken(): string {
-    const user = localStorage.getItem('user');
-    return user ? JSON.parse(user).token : '';
-}
+    const token = localStorage.getItem('token'); // Ensure you're accessing the correct key
+    return token || ''; // Return an empty string if no token is found
+  }
 
  // Making the api call for the user registration endpoint
   public userRegistration(userDetails: any): Observable<any> {
@@ -50,18 +50,28 @@ export class UserRegistrationService {
 
 // User Login
 public userLogin(userDetails: any): Observable<any> {
-  const token = localStorage.getItem('token');
   return this.http.post(apiUrl + '/login', userDetails).pipe(
+    map((response: any) => {
+      if (response.token) {
+        console.log('Token received:', response.token); // Debug log
+        localStorage.setItem('token', response.token); // Save the token to localStorage
+      }else {
+        console.error('No token received from server.');
+      }
+      return response;
+    }),
     catchError(this.handleError)
   );
 }
 
-
 // Get all movies
 public getAllMovies(): Observable<any> {
-  const token = localStorage.getItem('token'); // Assuming you save the token in localStorage
+  const token = this.getToken();
+  console.log('Retrieved Token:', token); // Debug log
+
+
   const headers = new HttpHeaders({
-    Authorization: `Bearer ${this.getToken()}`,
+    Authorization: `Bearer ${token}`,
   });
 
   console.log('Token:', localStorage.getItem('token'));
@@ -164,13 +174,13 @@ public deleteFavoriteMovie(Username: string, MovieID: string): Observable<any> {
 
 
 // Edit user info
-public editUser(Username: any): Observable<any> {
-  const token = this.getToken();  // Ensure the token is added to the request header
+public editUser(userData: any): Observable<any> {
+  const token = localStorage.getItem('token');  // Ensure the token is added to the request header
   const headers = new HttpHeaders({
     Authorization: `Bearer ${token}`,
   });
 
-  return this.http.put(apiUrl + `/users/${Username}`,
+  return this.http.put(apiUrl + `/users/${userData.Username}`, userData,
   {headers}).pipe(
       map(this.extractResponseData), catchError(this.handleError)
   );
@@ -183,7 +193,11 @@ public deleteUser(Username: string): Observable<any> {
     Authorization: `Bearer ${this.getToken()}`
   });
 
-  return this.http.delete(`${apiUrl}/users/${Username}`, { headers }).pipe(
+  return this.http.delete(`${apiUrl}/users/${Username}`, { 
+    headers,
+    responseType: 'text' as 'json'
+  
+  }).pipe(
     catchError((error: HttpErrorResponse) => {
       let parsedError = error;
 

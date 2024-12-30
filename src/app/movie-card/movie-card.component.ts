@@ -43,6 +43,18 @@ getAllMovies(): void {
     }
 
     openDetailsDialog(movie: any): void {
+
+      console.log('Opening dialog with data:', {
+        title: movie.Title || 'Untitled Movie',
+        year: movie.Year,
+        genre: movie.Genre?.Name || 'Unknown Genre',
+        genreDescription: movie.Genre?.Description || 'No description available',
+        director: movie.Director?.Name || 'Unknown Director',
+        directorBio: movie.Director?.Bio || 'No bio available',
+        synopsis: movie.Synopsis || 'No synopsis available',
+        image: movie.Image || 'No image available'  // Check if image exists
+      });
+
       this.dialog.open(MovieDetailsDialogComponent, {
         width: '900px',
         data: {
@@ -52,7 +64,8 @@ getAllMovies(): void {
           genreDescription: movie.Genre?.Description || 'No description available',
           director: movie.Director?.Name || 'Unknown Director',
           directorBio: movie.Director?.Bio || 'No bio available',
-          synopsis: movie.Synopsis || 'No synopsis available'
+          synopsis: movie.Description || 'No synopsis available',
+          image: movie.Image || '' 
         },
       });
     }

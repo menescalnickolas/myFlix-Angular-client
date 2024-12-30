@@ -1,20 +1,22 @@
 <h1 mat-dialog-title>{{ data.title }}</h1>
-<h1 mat-dialog-title>{{ data.year }}</h1>
+<h2 mat-dialog-subtitle>{{ data.year }}</h2> 
 <div mat-dialog-content>
+ <!-- Synopsis Section -->
+  <p><strong>Synopsis </strong>- {{ data.synopsis }} </p>
+
+
+
   <!-- Movie Image -->
-  <img *ngIf="data.Image" [src]="data.Image" alt="Movie Image" style="width: 100%; max-height: 200px; object-fit: cover; margin-bottom: 10px;">
+  <img *ngIf="data.image" [src]="data.image" alt="Movie Image" style="width: 100%; max-height: 200px; object-fit: cover; margin-bottom: 10px;">
   
   <!-- Genre Section -->
-  <p><strong>Genre:</strong> {{ data.genre }}</p>
-  <p><strong>Genre Description:</strong> {{ data.genreDescription }}</p>
+  <p><strong>{{ data.genre }}</strong> - {{ data.genreDescription }}</p>
+  
 
   <!-- Director Section -->
-  <p><strong>Director:</strong> {{ data.director }}</p>
-  <p><strong>Director Bio:</strong> {{ data.directorBio }}</p>
+  <p><strong>By {{ data.director }}</strong> - {{ data.directorBio }}</p>
 
-  <!-- Synopsis Section -->
-  <p><strong>Synopsis:</strong></p>
-  <p>{{ data.synopsis }}</p>
+ 
 </div>
 
 <!-- Dialog Actions -->

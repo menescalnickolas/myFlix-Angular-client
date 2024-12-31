@@ -1,26 +1,43 @@
+<div  >
 
-<mat-card style="height: 400px;">
-  <mat-card-header>
-    <mat-card-title style="">User Profile</mat-card-title>
-    <mat-card-title>Username: {{ userData.Username }}</mat-card-title>
-    <mat-card-title>Email: {{ userData.Email }}</mat-card-title>
+
+<mat-card style="height: 500px;">
+  <h2 style="margin: 0 auto; margin-top: 15px;">User Profile</h2>
+  <mat-card-header style="padding: 35px;">
+    
+    <mat-card-title style="padding: 5px;" >Username: {{ userData.Username }}</mat-card-title>
+    <mat-card-title style="padding: 5px;">Email: {{ userData.Email }}</mat-card-title>
+    <mat-card-title style="padding: 5px;">Birthday: {{ userData.Birthday }}</mat-card-title>
   </mat-card-header>
   <button
   mat-raised-button
   (click)="openEditProfileDialog()"
   color="primary"
-  style="margin-right: 10px;"
+  style="margin-top: 10px; width: 30px; margin: 0 auto;"
 >
 Edit
 </button>
 
+<h2 style="margin: 0 auto; margin-top: 24px;">Your Favorite Movies</h2>
+<div *ngIf="favoriteMovies.length > 0; else noFavorites">
+  <mat-card *ngFor="let movie of favoriteMovies" style="margin-bottom: 10px;">
+    <mat-card-title>{{ movie.Title }}</mat-card-title>
+    <mat-card-content>{{ movie.Description }}</mat-card-content>
+  </mat-card>
+</div>
+<ng-template #noFavorites>
+  <p style="margin: 0 auto; padding: 15px;">You have no favorite movies yet.</p>
+</ng-template>
 
   <button
   mat-raised-button
   (click)="logout()"
-  color="primary"
-  style="margin-right: 10px;"
+  color="warn"
+  style="margin-top: 10px; width: 30px; margin: 0 auto;"
+  class="logout-button"
 >
 Logout
 </button>
 </mat-card>
+
+</div>

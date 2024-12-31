@@ -142,6 +142,7 @@ public getFavoriteMovies(Username: string): Observable<any> {
   return this.http.get(apiUrl + '/users/' + Username + '/movies', {headers: new HttpHeaders(
     {
       Authorization: `Bearer ${this.getToken()}`,
+      'Content-Type': 'application/json',
     })}).pipe(
     map(this.extractResponseData),
     catchError(this.handleError)
@@ -149,11 +150,17 @@ public getFavoriteMovies(Username: string): Observable<any> {
 }
 
 // Add movie to favorites
-public addFavoriteMovie(Username: string, MovieID: string): Observable<any> {
-  const token = localStorage.getItem('token');
-  return this.http.post(apiUrl + '/users/' + Username + '/movies/' + MovieID, {headers: new HttpHeaders(
+public addFavoriteMovie(Username: string, movie: any): Observable<any> {
+  
+  console.log('Adding to favorites:', `users/${Username}/movies/${movie}`);
+  
+  const user = JSON.parse(localStorage.getItem('user') || '{}');
+  const token = user?.token;
+
+  return this.http.post(apiUrl + '/users/' + Username + '/movies/' + movie, {headers: new HttpHeaders(
     {
       Authorization: `Bearer ${this.getToken()}`,
+      'Content-Type': 'application/json',
     })}).pipe(
     map(this.extractResponseData),
     catchError(this.handleError)
@@ -174,16 +181,13 @@ public deleteFavoriteMovie(Username: string, MovieID: string): Observable<any> {
 
 
 // Edit user info
-public editUser(userData: any): Observable<any> {
-  const token = localStorage.getItem('token');  // Ensure the token is added to the request header
-  const headers = new HttpHeaders({
-    Authorization: `Bearer ${token}`,
+public editUser(Username: string, updatedUser: any): Observable<any> {
+  return this.http.put(apiUrl + `/users/${Username}`, updatedUser, {
+    headers: new HttpHeaders({
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+      'Content-Type': 'application/json',
+    }),
   });
-
-  return this.http.put(apiUrl + `/users/${userData.Username}`, userData,
-  {headers}).pipe(
-      map(this.extractResponseData), catchError(this.handleError)
-  );
 }
 
 

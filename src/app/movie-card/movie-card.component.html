@@ -2,23 +2,26 @@
     <button
     mat-raised-button
     (click)="openProfileViewDialog()"
-    style="margin-right: 10px;"
+    class="profile-button"
     color="primary"
   >
     PROFILE
   </button>
-
 </div>
 
-<div style="display: flex; flex-wrap: wrap; gap: 16px;">
-    <mat-card *ngFor="let movie of movies" style="flex: 1 1 auto;">
-        <img [src]="movie.Image" alt="{{ movie.Title }}" style="width: 100%; max-height: 200px; object-fit: cover;" />
+<div>
+  <h1 style="margin-left: 35px;">CINESCOPE</h1>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 16px; margin-top: 50px;">
+    <mat-card *ngFor="let movie of movies" style="flex: 1 1 auto; padding: 15px;">
+        <img [src]="movie.Image" alt="{{ movie.Title }}" style="max-width: 100%; max-height: 350px; object-fit: cover;" />
         <mat-card-header>
-            <mat-card-title>{{ movie.Title || 'Untitled Movie' }}</mat-card-title>
-            <mat-card-subtitle>Directed by: {{ movie.Director?.Name || 'Unknown Director' }}</mat-card-subtitle>
+            <mat-card-title style="margin: 0 auto; padding: 5px; font-weight: 500;">{{ movie.Title || 'Untitled Movie' }}</mat-card-title>
+            <mat-card-subtitle style="margin: 0 auto; padding: 5px;">{{ movie.Director?.Name || 'Unknown Director' }}</mat-card-subtitle>
         </mat-card-header>
         
-        <mat-card-actions>
+        <mat-card-actions class="more-info-button">
             <button
               mat-button
               color="primary"
@@ -26,7 +29,13 @@
             >
               More Info
             </button>
-            <mat-icon>favorite_border</mat-icon>
+            <mat-icon
+  (click)="toggleFavorite(movie)"
+  [color]="isFavorite(movie) ? 'warn' : ''"
+  style="cursor: pointer;"
+>
+  {{ isFavorite(movie._id) ? 'favorite' : 'favorite_border' }}
+</mat-icon>
           </mat-card-actions>
     </mat-card>
 </div>

@@ -1,25 +1,17 @@
-<h1 mat-dialog-title>{{ data.title }}</h1>
+<div style="max-width: 500px; margin: 0 auto;">
+
+<h1 style="padding: 15px;"> {{ data.title }}</h1>
 <h2 mat-dialog-subtitle>{{ data.year }}</h2> 
-<div mat-dialog-content>
- <!-- Synopsis Section -->
-  <p><strong>Synopsis </strong>- {{ data.synopsis }} </p>
-
-
-
-  <!-- Movie Image -->
-  <img *ngIf="data.image" [src]="data.image" alt="Movie Image" style="width: 100%; max-height: 200px; object-fit: cover; margin-bottom: 10px;">
+<div mat-dialog-content style="padding-bottom: 50px;">
+  <p><strong>Synopsis </strong><br> {{ data.synopsis }} </p>
   
-  <!-- Genre Section -->
-  <p><strong>{{ data.genre }}</strong> - {{ data.genreDescription }}</p>
+  <p><strong>{{ data.genre }}</strong> <br> {{ data.genreDescription }}</p>
   
-
-  <!-- Director Section -->
-  <p><strong>By {{ data.director }}</strong> - {{ data.directorBio }}</p>
-
- 
+  <p><strong>By {{ data.director }}</strong> <br> {{ data.directorBio }}</p>
 </div>
 
-<!-- Dialog Actions -->
 <div mat-dialog-actions>
-  <button mat-button mat-dialog-close>Close</button>
+  <button mat-button mat-dialog-close style="margin-bottom: 20px;">Close</button>
+</div>
+
 </div>

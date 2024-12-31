@@ -14,6 +14,7 @@ import { MatDialog } from '@angular/material/dialog';
 export class ProfileViewComponent implements OnInit {
   userData: any = {};
   favoriteMovies: any[] = [];
+  movies: any[] = [];
 
   constructor(
     public fetchApiData: UserRegistrationService,
@@ -26,6 +27,7 @@ export class ProfileViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUser();
+    this.getFavorites();
   }
 
   resetUser(): void {
@@ -35,14 +37,13 @@ export class ProfileViewComponent implements OnInit {
     this.router.navigate(["movies"]);
   }
 
-  getFavoriteMovies(): void {
-    this.fetchApiData.getAllMovies().subscribe((res: any) => {
-      this.favoriteMovies = res.filter((movie: any) => {
-        return this.userData.favoriteMovies.includes(movie._id)
-      })
-    }, (err: any) => {
-      console.error(err);
-    });
+  getFavorites(): void {
+    const Username = localStorage.getItem('user');
+    if (Username) {
+      this.fetchApiData.getFavoriteMovies(Username).subscribe((movies: any) => {
+        this.favoriteMovies = movies;
+      });
+    }
   }
 
   getUser(): void {
@@ -54,14 +55,14 @@ export class ProfileViewComponent implements OnInit {
         token: this.userData.token
       };
       localStorage.setItem("user", JSON.stringify(this.userData));
-      this.getFavoriteMovies();
+      this.getFavorites();
     })
   }
 
   removeFromFavorite(movie: any): void {
     this.fetchApiData.deleteFavoriteMovie(this.userData.id, movie.title).subscribe((res: any) => {
       this.userData.favoriteMovies = res.favoriteMovies;
-      this.getFavoriteMovies();
+      this.getFavorites();
     }, (err: any) => {
       console.error(err)
     })

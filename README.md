@@ -2,6 +2,68 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.0.
 
+This project is the frontend for the **MyFlix** application, a movie collection and management app built with Angular. The app allows users to browse and search for movies, view detailed information about each movie, and manage their favorite movies list.
+
+## Table of Contents
+
+- [Project Overview](#project-overview)
+- [Technologies Used](#technologies-used)
+- [Features](#features)
+- [Installation](#installation)
+- [Development Server](#development-server)
+- [Code Scaffolding](#code-scaffolding)
+- [Build](#build)
+- [Running Tests](#running-tests)
+- [Further Help](#further-help)
+
+## Project Overview
+
+The **MyFlix Angular Client** is built with **Angular CLI**, and it interacts with a backend API to display movie information. The app includes features like user authentication, browsing movies, and managing a list of favorite movies.
+
+## Technologies Used
+
+- **Angular** (v16.1.0)
+- **TypeScript**
+- **HTML5** and **CSS3**
+- **Bootstrap** (for responsive design)
+- **RxJS** (for reactive programming)
+
+## Features
+
+- **User Authentication**: Login and register users to store their favorite movies.
+- **Browse Movies**: View detailed information about movies such as description, genre, release date, and more.
+- **Manage Favorites**: Add and remove movies from your favorite list.
+- **Responsive Design**: Optimized for both desktop and mobile devices.
+- **Search**: Find movies by title or genre.
+
+## Installation
+
+To get started with the project, follow the steps below:
+
+1. **Clone the repository:**
+
+    ```bash
+    git clone https://github.com/yourusername/my-flix-angular-client.git
+    cd my-flix-angular-client
+    ```
+
+2. **Install dependencies:**
+
+    Make sure you have **Node.js** and **npm** installed on your machine.
+
+    ```bash
+    npm install
+    ```
+
+3. **Run the development server:**
+
+    ```bash
+    ng serve
+    ```
+
+    This will start a development server at `http://localhost:4200/`. The app will automatically reload when you make changes to the source files.
+
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.

@@ -1,5 +1,5 @@
 {
-  "entryPoints": ["src/index.html"],
+  "entryPoints": ["src/app"],
   "out": "docs",
   "includeVersion": true,
   "exclude": [

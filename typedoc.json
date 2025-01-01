@@ -1,0 +1,15 @@
+{
+  "entryPoints": ["src/index.html"],
+  "out": "docs",
+  "includeVersion": true,
+  "exclude": [
+    "**/*.spec.ts",
+    "**/node_modules/**",
+    "**/dist/**"
+  ],
+  "excludePrivate": true,
+  "excludeProtected": false,
+  "excludeExternals": true,
+  "theme": "default",
+  "readme": "README.md"
+}

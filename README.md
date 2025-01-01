@@ -43,15 +43,6 @@ To get started with the project, follow the steps below:
     npm install
     ```
 
-3. **Run the development server:**
-
-    ```bash
-    ng serve
-    ```
-
-    This will start a development server at `http://localhost:4200/`. The app will automatically reload when you make changes to the source files.
-
-
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.

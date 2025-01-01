@@ -4,18 +4,6 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 This project is the frontend for the **MyFlix** application, a movie collection and management app built with Angular. The app allows users to browse and search for movies, view detailed information about each movie, and manage their favorite movies list.
 
-## Table of Contents
-
-- [Project Overview](#project-overview)
-- [Technologies Used](#technologies-used)
-- [Features](#features)
-- [Installation](#installation)
-- [Development Server](#development-server)
-- [Code Scaffolding](#code-scaffolding)
-- [Build](#build)
-- [Running Tests](#running-tests)
-- [Further Help](#further-help)
-
 ## Project Overview
 
 The **MyFlix Angular Client** is built with **Angular CLI**, and it interacts with a backend API to display movie information. The app includes features like user authentication, browsing movies, and managing a list of favorite movies.

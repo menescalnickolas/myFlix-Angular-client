@@ -5,15 +5,41 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 
+/**
+ * Represents the EditUserScreenComponent, which allows users to edit their profile information or delete their account.
+ * 
+ * @component
+ */
+
 @Component({
   selector: 'app-edit-user-screen',
   templateUrl: './edit-user-screen.component.html',
   styleUrls: ['./edit-user-screen.component.scss']
 })
 export class EditUserScreenComponent implements OnInit {
+   /**
+   * The user data object containing the current user's information.
+   * 
+   * @type {object}
+   */
   userData: any = {};
+
+    /**
+   * The updated user data object to store changes made by the user.
+   * 
+   * @type {object}
+   */
   updatedUser: any = {};
 
+
+   /**
+   * Creates an instance of the EditUserScreenComponent.
+   * 
+   * @param {UserRegistrationService} fetchApiData - Service to handle user-related API calls (e.g., update or delete user).
+   * @param {Router} router - The Angular router for navigation.
+   * @param {MatDialogRef<EditUserScreenComponent>} dialogRef - Reference to close the dialog on successful updates or deletions.
+   * @param {MatSnackBar} snackBar - The Snackbar service used to show notifications to the user.
+   */
   constructor(
     public fetchApiData: UserRegistrationService,
     public router: Router,
@@ -31,14 +57,15 @@ export class EditUserScreenComponent implements OnInit {
 
   ngOnInit(): void {}
 
+
+  /**
+   * This method updates the user profile with the provided updated user data.
+   * If the update is successful, it stores the updated user data in localStorage, 
+   * shows a success message, and closes the dialog. If it fails, an error message is shown.
+   * 
+   * @returns {void}
+   */
   updateUser(): void {
-   
-   /*
-    if (!this.updatedUser || Object.keys(this.updatedUser).length === 0) {
-      this.snackBar.open('Please provide updated user information.', 'OK', { duration: 2000 });
-      return;
-    }
-*/
 
     this.fetchApiData.editUser(this.userData.Username, this.updatedUser).subscribe(
       (resp: any) => {
@@ -56,6 +83,15 @@ export class EditUserScreenComponent implements OnInit {
       }
     );
   }
+
+
+    /**
+   * This method deletes the user account after confirming the user's decision.
+   * Upon successful deletion, it clears localStorage, shows an alert, 
+   * and redirects the user to the welcome page.
+   * 
+   * @returns {void}
+   */
 
  deleteUser(): void {
   console.log('Deleting user with username:', this.userData.Username);

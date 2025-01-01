@@ -1,4 +1,4 @@
-// src/app/app.component.ts
+
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -11,13 +11,20 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'myFlix-Angular-client';
 
+    /**
+   * Creates an instance of the AppComponent.
+   * @param {Router} router - The Router service used for navigation.
+   */
   constructor(public router: Router) {}
 
+   /**
+   * Clears the local storage and navigates to the welcome page.
+   * This method is triggered when the user logs out.
+   */
   logout(): void {
-    // clear local storage
     localStorage.clear();
 
-    //redirect to welcome page
+    //Redirects to welcome page
     this.router.navigate(['welcome']);
   }
 }
